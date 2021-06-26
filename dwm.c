@@ -916,7 +916,7 @@ focusstack(int inc, int hid)
 {
 	Client *c = NULL, *i;
 
-	if ( (!selmon->sel && !hid) || selmon->sel->isfullscreen)
+	if ( (!selmon->sel || selmon->sel->isfullscreen) && !hid)
 		return;
 	if (!selmon->clients)
 		return;
@@ -936,7 +936,7 @@ focusstack(int inc, int hid)
 				if (ISVISIBLE(i) && !(!hid && HIDDEN(i)))
 					c = i;
 		} else
-			c = selmon->clients;	
+			c = selmon->clients;
 		if (!c)
 			for (; i; i = i->next)
 				if (ISVISIBLE(i) && !(!hid && HIDDEN(i)))
